@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "CommonJS", // Измените на CommonJS
+    "moduleResolution": "node", // Оставьте node
+    "outDir": "./backendDist", // Папка для скомпилированных .js файлов
+    "rootDir": "./backend", // Папка с исходным кодом TypeScript
+    "strict": true, // Включаем строгий режим
+    "esModuleInterop": true, // Для работы с CommonJS модулями
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true
+  },
+  "include": [
+    "backend/**/*.ts" // Включаем все файлы .ts в папке backend
+  ],
+  "exclude": ["node_modules"]
+}

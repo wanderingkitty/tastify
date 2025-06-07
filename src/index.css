@@ -1,0 +1,104 @@
+.dm-mono-light {
+  font-family: "DM Mono", monospace;
+  font-weight: 300;
+  font-style: normal;
+}
+
+.dm-mono-regular {
+  font-family: "DM Mono", monospace;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.dm-mono-medium {
+  font-family: "DM Mono", monospace;
+  font-weight: 500;
+  font-style: normal;
+}
+
+.dm-mono-light-italic {
+  font-family: "DM Mono", monospace;
+  font-weight: 300;
+  font-style: italic;
+}
+
+.dm-mono-regular-italic {
+  font-family: "DM Mono", monospace;
+  font-weight: 400;
+  font-style: italic;
+}
+
+.dm-mono-medium-italic {
+  font-family: "DM Mono", monospace;
+  font-weight: 500;
+  font-style: italic;
+}
+
+:root {
+  --main-bg-color: #1a1b1a;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  overflow-y: auto;
+  font-family: "DM Mono", monospace;
+}
+
+.landing-page {
+  position: relative; /* Ensure positioning for pseudo-element */
+}
+
+.landing-page::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  min-height: 100vh;
+  min-width: 100vw;
+  background-image: url(https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExOGI2dDVnaDZhNWZkb3htMms5Y3dkaHFtN3ltMmRyZDg2djB4cnA1cyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/SBvowbUwAmenC/giphy.gif);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  filter: grayscale(100%);
+  z-index: -1;
+}
+
+/* Make background responsive across all screen sizes */
+@media (max-width: 1024px) {
+  .landing-page::before {
+    background-size: cover;
+    background-position: center;
+  }
+}
+
+@media (max-width: 768px) {
+  .landing-page::before {
+    background-size: cover; /* Ensures full visibility on tablets */
+    background-position: top center;
+  }
+}
+
+@media (max-width: 600px) {
+  .landing-page::before {
+    background-size: cover;
+    background-position: center center;
+  }
+}
+@media (max-width: 500px) {
+  .landing-page::before {
+    background-size: cover;
+    background-position: center top;
+  }
+}
+
+@media (max-width: 400px) {
+  .landing-page::before {
+    background-size: cover;
+    background-position: top center;
+  }
+}
