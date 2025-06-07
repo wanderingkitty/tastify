@@ -18,7 +18,7 @@
 .recipes-page-header {
   font-size: 2rem;
   margin-bottom: 20px;
-  color: #3c6841;
+  color: #475569; /* Changed from #3c6841 to blue-gray */
 }
 
 .recipes-grid {
@@ -44,7 +44,7 @@
 }
 
 .recipe-card h3 {
-  color: #3c6841;
+  color: #475569; /* Changed from #3c6841 to blue-gray */
   margin-bottom: 10px;
   margin-top: 30px; /* Space for action buttons */
 }
@@ -76,7 +76,12 @@
 }
 
 .edit-btn:hover {
-  background-color: rgba(60, 104, 65, 0.1);
+  background-color: rgba(
+    71,
+    85,
+    105,
+    0.1
+  ); /* Changed from rgba(60, 104, 65, 0.1) */
 }
 
 .delete-btn:hover {
@@ -85,7 +90,7 @@
 
 /* Empty recipe cards */
 .empty-card {
-  border: 2px dashed #3c6841;
+  border: 2px dashed #475569; /* Changed from #3c6841 to blue-gray */
   background: transparent !important;
   cursor: pointer;
   display: flex;
@@ -96,20 +101,148 @@
 }
 
 .empty-card:hover {
-  border-color: #2a4d2f;
-  background: rgba(60, 104, 65, 0.05) !important;
+  border-color: #334155; /* Changed from #2a4d2f to darker blue-gray */
+  background: rgba(
+    71,
+    85,
+    105,
+    0.05
+  ) !important; /* Changed from rgba(60, 104, 65, 0.05) */
   transform: translateY(-2px);
 }
 
 .add-recipe-content {
   text-align: center;
-  color: #3c6841;
+  color: #475569; /* Changed from #3c6841 to blue-gray */
 }
 
 .add-recipe-content p {
   margin-top: 10px;
   font-weight: 500;
-  color: #3c6841;
+  color: #475569; /* Changed from #3c6841 to blue-gray */
+}
+
+/* Delete Modal Styles */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  backdrop-filter: blur(4px);
+}
+
+.delete-modal {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+    0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  max-width: 400px;
+  width: 90%;
+  max-height: 90vh;
+  overflow: hidden;
+  animation: modalSlideIn 0.2s ease-out;
+}
+
+@keyframes modalSlideIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 24px 16px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.modal-header h3 {
+  margin: 0;
+  color: #1f2937;
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.modal-close {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 4px;
+  transition: background-color 0.2s ease;
+}
+
+.modal-close:hover {
+  background-color: #f3f4f6;
+}
+
+.modal-content {
+  padding: 20px 24px;
+}
+
+.modal-content p {
+  margin: 0 0 12px 0;
+  color: #374151;
+  line-height: 1.5;
+}
+
+.warning-text {
+  color: #ef4444 !important;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 12px;
+  padding: 16px 24px 24px;
+  justify-content: flex-end;
+}
+
+.cancel-btn {
+  background: #f9fafb;
+  border: 1px solid #d1d5db;
+  color: #374151;
+  padding: 10px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.cancel-btn:hover {
+  background: #f3f4f6;
+  border-color: #9ca3af;
+}
+
+.delete-confirm-btn {
+  background: #ef4444;
+  border: 1px solid #ef4444;
+  color: white;
+  padding: 10px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.delete-confirm-btn:hover {
+  background: #dc2626;
+  border-color: #dc2626;
 }
 
 /* Dark mode adjustments */
@@ -119,7 +252,7 @@
 }
 
 .recipes-page-container.dark .recipe-card h3 {
-  color: #95d5b2;
+  color: #94a3b8; /* Changed from #95d5b2 to blue-gray */
 }
 
 .recipes-page-container.dark .recipe-card p {
@@ -127,20 +260,53 @@
 }
 
 .recipes-page-container.dark .empty-card {
-  border-color: #95d5b2;
+  border-color: #94a3b8; /* Changed from #95d5b2 to blue-gray */
 }
 
 .recipes-page-container.dark .empty-card:hover {
-  border-color: #b8e5c4;
-  background: rgba(149, 213, 178, 0.1) !important;
+  border-color: #cbd5e1; /* Changed from #b8e5c4 to lighter blue-gray */
+  background: rgba(
+    148,
+    163,
+    184,
+    0.1
+  ) !important; /* Changed from rgba(149, 213, 178, 0.1) */
 }
 
 .recipes-page-container.dark .add-recipe-content {
-  color: #95d5b2;
+  color: #94a3b8; /* Changed from #95d5b2 to blue-gray */
 }
 
 .recipes-page-container.dark .add-recipe-content p {
-  color: #95d5b2;
+  color: #94a3b8; /* Changed from #95d5b2 to blue-gray */
+}
+
+/* Dark mode modal */
+.recipes-page-container.dark .delete-modal {
+  background: #2a2a2a;
+  color: white;
+}
+
+.recipes-page-container.dark .modal-header {
+  border-bottom-color: #374151;
+}
+
+.recipes-page-container.dark .modal-header h3 {
+  color: white;
+}
+
+.recipes-page-container.dark .modal-content p {
+  color: #d1d5db;
+}
+
+.recipes-page-container.dark .cancel-btn {
+  background: #374151;
+  border-color: #4b5563;
+  color: #d1d5db;
+}
+
+.recipes-page-container.dark .cancel-btn:hover {
+  background: #4b5563;
 }
 
 /* Responsive */
@@ -162,5 +328,20 @@
 
   .action-btn {
     padding: 4px;
+  }
+
+  .delete-modal {
+    width: 95%;
+    margin: 20px;
+  }
+
+  .modal-actions {
+    flex-direction: column-reverse;
+  }
+
+  .cancel-btn,
+  .delete-confirm-btn {
+    width: 100%;
+    justify-content: center;
   }
 }
