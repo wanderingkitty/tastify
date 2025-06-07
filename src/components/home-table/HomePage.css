@@ -22,6 +22,26 @@
   border-radius: 8px;
 }
 
+.hamburger-btn {
+  position: fixed;
+  top: 1rem;
+  left: 1rem;
+  z-index: 1100;
+  background: none;
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+  color: white;
+  padding: 0.5rem;
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .hamburger-btn {
+    display: block;
+  }
+}
+
 .home-container.light {
   background-color: var(--main-bg-color);
 }

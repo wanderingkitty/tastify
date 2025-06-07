@@ -125,3 +125,42 @@
 .dark-light-mode-btn:hover {
   background-color: rgba(255, 255, 255, 0.1);
 }
+
+@media (max-width: 768px) {
+  .menu-side-container {
+    transform: translateX(-100%);
+    width: var(
+      --sidebar-width-mobile,
+      280px
+    ); /* по умолчанию — можно изменить */
+  }
+
+  .menu-side-container.mobile-open {
+    transform: translateX(0);
+  }
+
+  .content-container {
+    margin-left: 0;
+    width: 100%;
+  }
+}
+
+.hamburger-btn {
+  position: fixed;
+  top: 2rem;
+  left: 1rem;
+  z-index: 1100;
+  font-size: 2rem;
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  padding: 0.5rem;
+  display: none; /* по умолчанию скрыта */
+}
+
+@media (max-width: 768px) {
+  .hamburger-btn {
+    display: block; /* только на маленьких экранах */
+  }
+}
