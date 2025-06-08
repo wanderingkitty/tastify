@@ -263,7 +263,8 @@ h3 {
   font-size: clamp(0.8rem, 1.5vw, 1rem);
   border-collapse: separate; /* Измените на separate для показа внешней границы */
   border-spacing: 0; /* Убираем пространство между ячейками */
-  border-top: 1px solid var(--side-menu-bar-bg-color); /* Увеличьте толщину границы */
+  border: 1px solid var(--side-menu-bar-bg-color); /* Увеличьте толщину границы */
+  border-bottom: none;
   border-radius: 8px;
   overflow: hidden;
 }
