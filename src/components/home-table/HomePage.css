@@ -149,7 +149,7 @@ hr {
 
 .action-section h2,
 h3 {
-  color: #3c6841;
+  color: #475569;
   font-size: clamp(1.1rem, 2.5vw, 1.4rem);
   margin: 0 0 1rem 0;
 }
@@ -189,14 +189,14 @@ h3 {
   border: none;
   margin: 1rem 0;
   cursor: pointer;
-  background-color: #3c6841;
+  background-color: #475569;
   color: white;
   font-weight: 500;
   transition: all 0.2s ease;
 }
 
 .submit-btn:hover {
-  background-color: #2a4d2f;
+  background-color: #475569;
 }
 
 .submit-btn:active {
@@ -259,17 +259,16 @@ h3 {
 .week-table {
   width: 100%;
   max-width: 100%;
-  border-collapse: collapse;
   margin: 1rem 0;
   font-size: clamp(0.8rem, 1.5vw, 1rem);
-  background-color: #b8e5c4;
+  border-collapse: separate; /* Измените на separate для показа внешней границы */
+  border-spacing: 0; /* Убираем пространство между ячейками */
+  border-top: 1px solid var(--side-menu-bar-bg-color); /* Увеличьте толщину границы */
   border-radius: 8px;
   overflow: hidden;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .week-table thead {
-  background-color: #95d5b2;
   color: #000;
   font-weight: bold;
   text-align: left;
@@ -278,7 +277,8 @@ h3 {
 .week-table th,
 .week-table td {
   padding: clamp(0.5rem, 2vw, 0.75rem) clamp(0.5rem, 2vw, 1rem);
-  border-bottom: 1px solid #a3cfbb;
+  border-right: 1px solid var(--side-menu-bar-bg-color);
+  border-bottom: 1px solid var(--side-menu-bar-bg-color);
   text-align: left;
 }
 
@@ -287,8 +287,13 @@ h3 {
   font-weight: 500;
 }
 
-.week-table tr:last-child td {
-  border-bottom: none;
+.week-table th:last-child,
+.week-table td:last-child {
+  border-right: none;
+}
+
+week-table tbody tr:last-child td {
+  border-bottom: none !;
 }
 
 .week-table th .th-content {

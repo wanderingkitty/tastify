@@ -3,12 +3,37 @@ import "./HomePage.css";
 import { useEffect, useState } from "react";
 import SideBar from "../SideBar";
 
+// Интерфейс для данных таблицы
+interface MealPlan {
+  day: string;
+  breakfast: string;
+  branch: string;
+  lunch: string;
+  dinner: string;
+}
+
 const HomePage = () => {
   const navigate = useNavigate();
   const [isDarkmode, setIsDarkMode] = useState<boolean>(false);
   const [recipeUrl, setRecipeUrl] = useState<string>("");
   const [showPreview, setShowPreview] = useState<boolean>(false);
   const [isSidebarOpen, setSidebarOpen] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
+  const [editingCell, setEditingCell] = useState<{
+    day: string;
+    meal: string;
+  } | null>(null);
+
+  // Состояние для данных таблицы
+  const [mealPlan, setMealPlan] = useState<MealPlan[]>([
+    { day: "Monday", breakfast: "", branch: "", lunch: "", dinner: "" },
+    { day: "Tuesday", breakfast: "", branch: "", lunch: "", dinner: "" },
+    { day: "Wednesday", breakfast: "", branch: "", lunch: "", dinner: "" },
+    { day: "Thursday", breakfast: "", branch: "", lunch: "", dinner: "" },
+    { day: "Friday", breakfast: "", branch: "", lunch: "", dinner: "" },
+    { day: "Saturday", breakfast: "", branch: "", lunch: "", dinner: "" },
+    { day: "Sunday", breakfast: "", branch: "", lunch: "", dinner: "" },
+  ]);
 
   const toggleSidebar = () => {
     setSidebarOpen(!isSidebarOpen);
@@ -25,7 +50,6 @@ const HomePage = () => {
   const handleSubmitRecipe = () => {
     if (recipeUrl.trim()) {
       setShowPreview(true);
-      // Здесь можно добавить логику для обработки URL рецепта
       console.log("Processing recipe URL:", recipeUrl);
     }
   };
@@ -36,6 +60,82 @@ const HomePage = () => {
 
   const toggleDarkmode = () => {
     setIsDarkMode(!isDarkmode);
+  };
+
+  const toggleEditMode = () => {
+    setIsEditing(!isEditing);
+    setEditingCell(null);
+  };
+
+  // Функция для обновления значения в ячейке
+  const updateMealPlan = (
+    day: string,
+    meal: keyof Omit<MealPlan, "day">,
+    value: string
+  ) => {
+    setMealPlan((prev) =>
+      prev.map((item) => (item.day === day ? { ...item, [meal]: value } : item))
+    );
+  };
+
+  // Функция для начала редактирования ячейки
+  const startEditing = (day: string, meal: string) => {
+    if (isEditing) {
+      setEditingCell({ day, meal });
+    }
+  };
+
+  // Функция для завершения редактирования
+  const finishEditing = () => {
+    setEditingCell(null);
+  };
+
+  // Рендер ячейки с возможностью редактирования
+  const renderEditableCell = (
+    day: string,
+    meal: keyof Omit<MealPlan, "day">,
+    value: string
+  ) => {
+    const isCurrentlyEditing =
+      editingCell?.day === day && editingCell?.meal === meal;
+
+    if (isEditing && isCurrentlyEditing) {
+      return (
+        <input
+          type="text"
+          value={value}
+          onChange={(e) => updateMealPlan(day, meal, e.target.value)}
+          onBlur={finishEditing}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              finishEditing();
+            }
+          }}
+          autoFocus
+          style={{
+            width: "100%",
+            border: "none",
+            background: "transparent",
+            outline: "none",
+            padding: "2px",
+          }}
+        />
+      );
+    }
+
+    return (
+      <span
+        onClick={() => startEditing(day, meal)}
+        style={{
+          cursor: isEditing ? "pointer" : "default",
+          minHeight: "20px",
+          display: "block",
+          width: "100%",
+        }}
+      >
+        {value || (isEditing ? "Press for editing" : "")}
+      </span>
+    );
   };
 
   useEffect(() => {
@@ -51,7 +151,6 @@ const HomePage = () => {
 
   return (
     <div className={`home-container ${isDarkmode ? "dark" : "light"}`}>
-      {/* Кнопка бургер-меню */}
       <button className="hamburger-btn" onClick={toggleSidebar}>
         ☰
       </button>
@@ -63,7 +162,6 @@ const HomePage = () => {
       />
 
       <div className="content-container">
-        {/* Dark/Light mode button */}
         <button
           onClick={toggleDarkmode}
           style={{
@@ -96,7 +194,6 @@ const HomePage = () => {
         <div className="actions-table">
           <div className="smart-recipe-input">
             <h2>Smart recipe generator</h2>
-
             <label htmlFor="url">Enter recipe link here</label>
             <input
               type="url"
@@ -137,7 +234,7 @@ const HomePage = () => {
 
         <div className="week-container action-section">
           <h2 className="weekplate-header">Weekplate</h2>
-          <button className="edit-weektable">
+          <button className="edit-weektable" onClick={toggleEditMode}>
             {isDarkmode ? (
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -160,6 +257,13 @@ const HomePage = () => {
               </svg>
             )}
           </button>
+          {isEditing && (
+            <span
+              style={{ marginLeft: "10px", fontSize: "0.9rem", color: "#666" }}
+            >
+              Editing mode
+            </span>
+          )}
         </div>
 
         <table className="week-table">
@@ -238,27 +342,27 @@ const HomePage = () => {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>Monday</td>
-            </tr>
-            <tr>
-              <td>Tuesday</td>
-            </tr>
-            <tr>
-              <td>Wednesday</td>
-            </tr>
-            <tr>
-              <td>Thursday</td>
-            </tr>
-            <tr>
-              <td>Friday</td>
-            </tr>
-            <tr>
-              <td>Saturday</td>
-            </tr>
-            <tr>
-              <td>Sunday</td>
-            </tr>
+            {mealPlan.map((dayPlan) => (
+              <tr key={dayPlan.day}>
+                <td>{dayPlan.day}</td>
+                <td>
+                  {renderEditableCell(
+                    dayPlan.day,
+                    "breakfast",
+                    dayPlan.breakfast
+                  )}
+                </td>
+                <td>
+                  {renderEditableCell(dayPlan.day, "branch", dayPlan.branch)}
+                </td>
+                <td>
+                  {renderEditableCell(dayPlan.day, "lunch", dayPlan.lunch)}
+                </td>
+                <td>
+                  {renderEditableCell(dayPlan.day, "dinner", dayPlan.dinner)}
+                </td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>
